@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { Heart, Play, Pause, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
 
+// --- CONFIGURACIÓN DE CORAZONES GRANDES ---
 const fireHearts = () => {
   const duration = 5 * 1000;
   const animationEnd = Date.now() + duration;
@@ -35,6 +36,7 @@ export default function App() {
     `${baseUrl}foto6.jpg`
   ];
 
+  // --- LÓGICA: CONTADOR DE TIEMPO ---
   useEffect(() => {
     const anniversary = new Date('2023-02-23T00:00:00');
     const timer = setInterval(() => {
@@ -50,6 +52,7 @@ export default function App() {
     return () => clearInterval(timer);
   }, []);
 
+  // --- LÓGICA: CARRUSEL AUTOMÁTICO ---
   useEffect(() => {
     if (!yesPressed) {
       const interval = setInterval(() => {
@@ -63,9 +66,11 @@ export default function App() {
     setTimeout(() => setLoading(false), 3000);
   }, []);
 
+  // --- FUNCIÓN PARA MOVER EL BOTÓN (SOPORTE PC Y MÓVIL) ---
   const moveNoButton = () => {
-    const x = Math.random() * (window.innerWidth - 100) - (window.innerWidth / 2);
-    const y = Math.random() * (window.innerHeight - 100) - (window.innerHeight / 2);
+    const padding = 100;
+    const x = Math.random() * (window.innerWidth - padding * 2) - (window.innerWidth / 2 - padding);
+    const y = Math.random() * (window.innerHeight - padding * 2) - (window.innerHeight / 2 - padding);
     setNoButtonPos({ x, y });
   };
 
@@ -82,7 +87,7 @@ export default function App() {
         </div>
       ) : (
         <>
-          {/* REPRODUCTOR */}
+          {/* REPRODUCTOR PROFESIONAL */}
           <motion.div initial={{ y: -100 }} animate={{ y: 0 }} className="fixed top-4 right-4 z-50 bg-white/70 backdrop-blur-xl p-2 rounded-2xl shadow-2xl border border-pink-100 flex items-center gap-4">
             <img src={`${baseUrl}portada.jpg`} alt="Junior H" className="w-12 h-12 rounded-lg shadow-md object-cover" />
             <div className="pr-4">
@@ -95,7 +100,7 @@ export default function App() {
           </motion.div>
 
           <main className="max-w-5xl mx-auto px-4 py-10 flex flex-col items-center">
-            {/* CONTADOR */}
+            {/* CONTADOR DE TIEMPO JUNTOS */}
             {!yesPressed && (
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-12 flex gap-4 md:gap-8 bg-white/50 p-6 rounded-3xl border border-pink-100 shadow-sm backdrop-blur-sm">
                 <div className="flex flex-col items-center"><span className="text-3xl font-bold text-[#D47281]">{timeTogether.days}</span><span className="text-[10px] uppercase tracking-widest">Días</span></div>
@@ -105,7 +110,7 @@ export default function App() {
               </motion.div>
             )}
 
-            {/* CARRUSEL */}
+            {/* CARRUSEL DE FOTOS AUTOMÁTICO */}
             {!yesPressed && (
               <div className="w-full mb-12 text-center">
                 <h2 className="font-cursive text-5xl text-[#D47281] mb-8">Nuestros Momentos</h2>
@@ -117,7 +122,7 @@ export default function App() {
               </div>
             )}
 
-            {/* PREGUNTA */}
+            {/* SECCIÓN PREGUNTA */}
             {!yesPressed ? (
               <motion.div className="text-center mt-10">
                 <h1 className="font-cursive text-6xl md:text-8xl text-[#D47281] mb-4 leading-tight">Para Ariadna Lara...</h1>
@@ -125,12 +130,19 @@ export default function App() {
                 <h2 className="font-cursive text-4xl md:text-6xl font-bold mb-20 px-4 text-[#4A4A4A]">¿Quieres ser mi 14 de Febrero?</h2>
                 <div className="relative flex justify-center items-center gap-12 h-32">
                   <button onClick={() => { setYesPressed(true); fireHearts(); }} className="bg-[#D47281] text-white px-12 py-5 rounded-full text-2xl font-bold shadow-xl hover:scale-110 transition-all z-10">¡SÍ, ACEPTO! ❤️</button>
-                  <motion.button animate={{ x: noButtonPos.x, y: noButtonPos.y }} onMouseEnter={moveNoButton} className="bg-white text-gray-400 px-8 py-4 rounded-full text-lg border border-gray-100 shadow-sm">No</motion.button>
+                  <motion.button 
+                    animate={{ x: noButtonPos.x, y: noButtonPos.y }} 
+                    onMouseEnter={moveNoButton} 
+                    onTouchStart={moveNoButton}
+                    className="bg-white text-gray-400 px-8 py-4 rounded-full text-lg border border-gray-100 shadow-sm touch-none"
+                  >
+                    No
+                  </motion.button>
                 </div>
               </motion.div>
             ) : (
               <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-20">
-                <h1 className="font-cursive text-8xl text-[#D47281] mb-10 leading-tight">¡Eres lo mejor que me ha pasado!</h1>
+                <h1 className="font-cursive text-8xl text-[#D47281] mb-10 leading-tight">¡Eres el sí más bonito!</h1>
                 <div className="max-w-2xl bg-white/80 p-10 rounded-[40px] shadow-inner border border-pink-50 mx-auto">
                   <p className="text-2xl leading-relaxed text-gray-700 font-light italic">Un simple te amo no es suficiente para expresar todo lo que siento por ti. Aprecio que estés conmigo a pesar de todo, agradezco que siempre me saques una sonrisa con tus mensajes, fotos o tik toks. <br/><br/> Mi vida es tan linda porque tú formas parte de ella, nunca habrá alguien que me haga sentir exactamente como tú lo haces. Te amo mi terroncito de azúcar ❤️</p>
                 </div>
