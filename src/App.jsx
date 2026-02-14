@@ -25,7 +25,15 @@ export default function App() {
   const [timeTogether, setTimeTogether] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const audioRef = useRef(null);
 
-  const photos = ['/foto1.jpg', '/foto2.jpg', '/foto4.jpg', '/foto5.jpg', '/foto6.jpg'];
+  // --- SOLUCIÓN DE RUTAS PARA GITHUB PAGES ---
+  const baseUrl = import.meta.env.BASE_URL;
+  const photos = [
+    `${baseUrl}foto1.jpg`,
+    `${baseUrl}foto2.jpg`,
+    `${baseUrl}foto4.jpg`,
+    `${baseUrl}foto5.jpg`,
+    `${baseUrl}foto6.jpg`
+  ];
 
   useEffect(() => {
     const anniversary = new Date('2023-02-23T00:00:00');
@@ -63,20 +71,20 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#FFF9FB] text-[#4A4A4A] overflow-x-hidden relative">
-      <audio ref={audioRef} src="/musica.mp3" loop />
+      <audio ref={audioRef} src={`${baseUrl}musica.mp3`} loop />
       
       {loading ? (
         <div className="h-screen bg-[#FFD1DC] flex flex-col justify-center items-center font-serif">
           <motion.div animate={{ scale: [1, 1.3, 1], rotate: [0, 10, -10, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
             <Heart size={80} className="text-[#D47281] fill-[#D47281]" />
           </motion.div>
-          <p className="mt-6 text-[#D47281] text-2xl font-cursive italic">Preparando algo especial para Ari...</p>
+          <p className="mt-6 text-[#D47281] text-2xl font-cursive italic text-center px-4">Preparando algo especial para Ari...</p>
         </div>
       ) : (
         <>
           {/* REPRODUCTOR */}
           <motion.div initial={{ y: -100 }} animate={{ y: 0 }} className="fixed top-4 right-4 z-50 bg-white/70 backdrop-blur-xl p-2 rounded-2xl shadow-2xl border border-pink-100 flex items-center gap-4">
-            <img src="/portada.jpg" alt="Junior H" className="w-12 h-12 rounded-lg shadow-md object-cover" />
+            <img src={`${baseUrl}portada.jpg`} alt="Junior H" className="w-12 h-12 rounded-lg shadow-md object-cover" />
             <div className="pr-4">
               <p className="text-[10px] uppercase font-bold text-[#D47281]">Escuchando ahora</p>
               <p className="text-sm font-semibold truncate w-32">Yo Voy a Amarte</p>
@@ -112,7 +120,7 @@ export default function App() {
             {/* PREGUNTA */}
             {!yesPressed ? (
               <motion.div className="text-center mt-10">
-                <h1 className="font-cursive text-6xl md:text-8xl text-[#D47281] mb-4">Para Ariadna Lara...</h1>
+                <h1 className="font-cursive text-6xl md:text-8xl text-[#D47281] mb-4 leading-tight">Para Ariadna Lara...</h1>
                 <p className="text-xl italic text-gray-400 mb-12">"Mi terroncito de azúcar, mi amor..."</p>
                 <h2 className="font-cursive text-4xl md:text-6xl font-bold mb-20 px-4 text-[#4A4A4A]">¿Quieres ser mi 14 de Febrero?</h2>
                 <div className="relative flex justify-center items-center gap-12 h-32">
@@ -122,10 +130,9 @@ export default function App() {
               </motion.div>
             ) : (
               <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-20">
-                <h1 className="font-cursive text-8xl text-[#D47281] mb-10">¡Eres lo mejor que me ha pasado!</h1>
+                <h1 className="font-cursive text-8xl text-[#D47281] mb-10 leading-tight">¡Eres el sí más bonito!</h1>
                 <div className="max-w-2xl bg-white/80 p-10 rounded-[40px] shadow-inner border border-pink-50 mx-auto">
-                  <p className="text-2xl leading-relaxed text-gray-700 font-light italic">"Un simple te amo no es suficiente para expresar todo lo que siento por ti. Aprecio que estés conmigo a pesar de todo, agradezco que siempre me saques una sonrisa con tus mensajes, fotos o tik toks. 
-                    Mi vida es tan linda porque tú formas parte de ella, nunca habrá alguien que me haga sentir exactamente como tú lo haces. Te amo mi terroncito de azúcar ❤️"</p>
+                  <p className="text-2xl leading-relaxed text-gray-700 font-light italic">"Un simple te amo no es suficiente para expresar todo lo que siento por ti. Aprecio que estés conmigo a pesar de todo, agradezco que siempre me saques una sonrisa con tus mensajes, fotos o tik toks. <br/><br/> Mi vida es tan linda porque tú formas parte de ella, nunca habrá alguien que me haga sentir exactamente como tú lo haces. Te amo mi terroncito de azúcar ❤️"</p>
                 </div>
               </motion.div>
             )}
