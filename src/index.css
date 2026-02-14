@@ -1,0 +1,9 @@
+@import "tailwindcss";@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@300;400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.font-cursive {
+  font-family: 'Dancing Script', cursive;
+}
