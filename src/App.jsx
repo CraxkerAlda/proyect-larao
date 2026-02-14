@@ -130,9 +130,9 @@ export default function App() {
               </motion.div>
             ) : (
               <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-20">
-                <h1 className="font-cursive text-8xl text-[#D47281] mb-10 leading-tight">¡Eres el sí más bonito!</h1>
+                <h1 className="font-cursive text-8xl text-[#D47281] mb-10 leading-tight">¡Eres lo mejor que me ha pasado!</h1>
                 <div className="max-w-2xl bg-white/80 p-10 rounded-[40px] shadow-inner border border-pink-50 mx-auto">
-                  <p className="text-2xl leading-relaxed text-gray-700 font-light italic">"Un simple te amo no es suficiente para expresar todo lo que siento por ti. Aprecio que estés conmigo a pesar de todo, agradezco que siempre me saques una sonrisa con tus mensajes, fotos o tik toks. <br/><br/> Mi vida es tan linda porque tú formas parte de ella, nunca habrá alguien que me haga sentir exactamente como tú lo haces. Te amo mi terroncito de azúcar ❤️"</p>
+                  <p className="text-2xl leading-relaxed text-gray-700 font-light italic">Un simple te amo no es suficiente para expresar todo lo que siento por ti. Aprecio que estés conmigo a pesar de todo, agradezco que siempre me saques una sonrisa con tus mensajes, fotos o tik toks. <br/><br/> Mi vida es tan linda porque tú formas parte de ella, nunca habrá alguien que me haga sentir exactamente como tú lo haces. Te amo mi terroncito de azúcar ❤️</p>
                 </div>
               </motion.div>
             )}
